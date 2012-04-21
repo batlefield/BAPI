@@ -1,0 +1,27 @@
+--- ../src_base/minecraft/net/minecraft/src/WorldChunkManager.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_work/minecraft/net/minecraft/src/WorldChunkManager.java	0000-00-00 00:00:00.000000000 -0000
+@@ -4,6 +4,8 @@
+ import java.util.List;
+ import java.util.Random;
+ 
++import net.minecraft.src.BAPI.Main;
++
+ public class WorldChunkManager
+ {
+     private GenLayer genBiomes;
+@@ -20,14 +22,7 @@
+     protected WorldChunkManager()
+     {
+         this.biomeCache = new BiomeCache(this);
+-        this.biomesToSpawnIn = new ArrayList();
+-        this.biomesToSpawnIn.add(BiomeGenBase.forest);
+-        this.biomesToSpawnIn.add(BiomeGenBase.plains);
+-        this.biomesToSpawnIn.add(BiomeGenBase.taiga);
+-        this.biomesToSpawnIn.add(BiomeGenBase.taigaHills);
+-        this.biomesToSpawnIn.add(BiomeGenBase.forestHills);
+-        this.biomesToSpawnIn.add(BiomeGenBase.jungle);
+-        this.biomesToSpawnIn.add(BiomeGenBase.jungleHills);
++        this.biomesToSpawnIn = Main.getBiome(4);
+     }
+ 
+     public WorldChunkManager(long par1, WorldType par3WorldType)

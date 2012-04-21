@@ -1,0 +1,27 @@
+--- ../src_base/minecraft/net/minecraft/src/BlockTorch.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_work/minecraft/net/minecraft/src/BlockTorch.java	0000-00-00 00:00:00.000000000 -0000
+@@ -2,6 +2,8 @@
+ 
+ import java.util.Random;
+ 
++import net.minecraft.src.BAPI.Main;
++
+ public class BlockTorch extends Block
+ {
+     protected BlockTorch(int par1, int par2)
+@@ -56,13 +58,12 @@
+         else
+         {
+             int var5 = par1World.getBlockId(par2, par3, par4);
++            int var6 = par1World.getBlockMetadata(par2, par3, par4);
+ 
+-            if (var5 != Block.fence.blockID && var5 != Block.netherFence.blockID && var5 != Block.glass.blockID)
++            if (!Main.canPlaceT(var5, var6))
+             {
+                 if (Block.blocksList[var5] != null && Block.blocksList[var5] instanceof BlockStairs)
+                 {
+-                    int var6 = par1World.getBlockMetadata(par2, par3, par4);
+-
+                     if ((4 & var6) != 0)
+                     {
+                         return true;

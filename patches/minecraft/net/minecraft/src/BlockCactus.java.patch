@@ -1,0 +1,46 @@
+--- ../src_base/minecraft/net/minecraft/src/BlockCactus.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_work/minecraft/net/minecraft/src/BlockCactus.java	0000-00-00 00:00:00.000000000 -0000
+@@ -2,6 +2,8 @@
+ 
+ import java.util.Random;
+ 
++import net.minecraft.src.BAPI.Main;
++
+ public class BlockCactus extends Block
+ {
+     protected BlockCactus(int par1, int par2)
+@@ -63,9 +65,21 @@
+     /**
+      * Returns the block texture based on the side being looked at.  Args: side
+      */
+-    public int getBlockTextureFromSide(int par1)
++    public int getBlockTextureFromSide(int i)
+     {
+-        return par1 == 1 ? this.blockIndexInTexture - 1 : (par1 == 0 ? this.blockIndexInTexture + 1 : this.blockIndexInTexture);
++        if (i == 1)
++        {
++            return blockIndexInTexture - 1;
++        }
++
++        if (i == 0)
++        {
++            return blockIndexInTexture + 1;
++        }
++        else
++        {
++            return blockIndexInTexture;
++        }
+     }
+ 
+     /**
+@@ -135,6 +149,10 @@
+         {
+             return false;
+         }
++        else if (Main.canPlaceC(par1World.getBlockId(par2, par3 - 1, par4), par1World.getBlockMetadata(par2, par3 - 1, par4)))
++        {
++            return true;
++        }
+         else
+         {
+             int var5 = par1World.getBlockId(par2, par3 - 1, par4);

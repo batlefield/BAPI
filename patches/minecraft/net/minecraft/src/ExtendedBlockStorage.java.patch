@@ -1,0 +1,16 @@
+--- ../src_base/minecraft/net/minecraft/src/ExtendedBlockStorage.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_work/minecraft/net/minecraft/src/ExtendedBlockStorage.java	0000-00-00 00:00:00.000000000 -0000
+@@ -75,7 +75,12 @@
+         if (var5 == 0 && par4 != 0)
+         {
+             ++this.blockRefCount;
+-
++            
++            if(par4 < 0)
++            {
++            	par4 += 256;
++            }
++            
+             if (Block.blocksList[par4] != null && Block.blocksList[par4].getTickRandomly())
+             {
+                 ++this.tickRefCount;

@@ -1,0 +1,44 @@
+--- ../src_base/minecraft_server/net/minecraft/src/SaveHandler.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_work/minecraft_server/net/minecraft/src/SaveHandler.java	0000-00-00 00:00:00.000000000 -0000
+@@ -9,6 +9,8 @@
+ import java.util.List;
+ import java.util.logging.Logger;
+ 
++import net.minecraft.src.BAPI.Main;
++
+ public class SaveHandler implements IPlayerFileData, ISaveHandler
+ {
+     /** Reference to the logger. */
+@@ -121,6 +123,7 @@
+      */
+     public WorldInfo loadWorldInfo()
+     {
++        Main.loadNBT(worldDirectory);
+         File var1 = new File(this.worldDirectory, "level.dat");
+         NBTTagCompound var2;
+         NBTTagCompound var3;
+@@ -204,6 +207,7 @@
+      */
+     public void saveWorldInfo(WorldInfo par1WorldInfo)
+     {
++        Main.saveNBT(worldDirectory);
+         NBTTagCompound var2 = par1WorldInfo.getNBTTagCompound();
+         NBTTagCompound var3 = new NBTTagCompound();
+         var3.setTag("Data", var2);
+@@ -245,6 +249,8 @@
+      */
+     public void writePlayerData(EntityPlayer par1EntityPlayer)
+     {
++        Main.savePlayerNBT(worldFile, par1EntityPlayer.username);
++
+         try
+         {
+             NBTTagCompound var2 = new NBTTagCompound();
+@@ -271,6 +277,7 @@
+      */
+     public void readPlayerData(EntityPlayer par1EntityPlayer)
+     {
++        Main.loadPlayerNBT(worldFile, par1EntityPlayer.username);
+         NBTTagCompound var2 = this.getPlayerData(par1EntityPlayer.username);
+ 
+         if (var2 != null)

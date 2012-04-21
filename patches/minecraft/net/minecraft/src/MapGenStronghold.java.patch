@@ -1,0 +1,20 @@
+--- ../src_base/minecraft/net/minecraft/src/MapGenStronghold.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_work/minecraft/net/minecraft/src/MapGenStronghold.java	0000-00-00 00:00:00.000000000 -0000
+@@ -4,6 +4,8 @@
+ import java.util.List;
+ import java.util.Random;
+ 
++import net.minecraft.src.BAPI.Main;
++
+ public class MapGenStronghold extends MapGenStructure
+ {
+     private BiomeGenBase[] allowedBiomeGenBases;
+@@ -16,7 +18,7 @@
+ 
+     public MapGenStronghold()
+     {
+-        this.allowedBiomeGenBases = new BiomeGenBase[] {BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.extremeHills, BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.icePlains, BiomeGenBase.iceMountains, BiomeGenBase.desertHills, BiomeGenBase.forestHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.jungle, BiomeGenBase.jungleHills};
++        this.allowedBiomeGenBases = (BiomeGenBase[]) Main.getBiome(3).toArray(new BiomeGenBase[Main.getBiome(3).size()]);
+         this.structureCoords = new ChunkCoordIntPair[3];
+     }
+ 
