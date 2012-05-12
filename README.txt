@@ -5,7 +5,7 @@ It should create a folder "BAPI" within that directory, containing all
 extracted files.
 
 You should use freshly downloaded jars, solely including ModLoader in the 
-client jar and forge folder inside your MCP directory.
+client jar. Anything else can eventually cause conflicts.
 
 If the automatic download of fernflower fails you can get it here
 http://goo.gl/PnJHp. Extract fernflower.jar into your MCP's runtime/bin folder.

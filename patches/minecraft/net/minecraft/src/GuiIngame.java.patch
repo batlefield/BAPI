@@ -1,0 +1,31 @@
+--- ../src_base/minecraft/net/minecraft/src/GuiIngame.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_work/minecraft/net/minecraft/src/GuiIngame.java	0000-00-00 00:00:00.000000000 -0000
+@@ -8,6 +8,9 @@
+ import net.minecraft.client.Minecraft;
+ import org.lwjgl.opengl.GL11;
+ import org.lwjgl.opengl.GL12;
++import net.minecraft.src.BAPI.BAPIException;
++import net.minecraft.src.BAPI.Main;
++import net.minecraft.src.BAPI.interfaces.IGameOverlay;
+ 
+ import net.minecraft.src.forge.*;
+ 
+@@ -82,6 +85,18 @@
+             }
+         }
+ 
++		for (Object o : Main.getGameOverlays())
++		{
++			if (o instanceof IGameOverlay)
++			{
++				IGameOverlay handler = (IGameOverlay) o;
++				handler.render(mc, var6, var7, par1, par2);
++			} else
++			{
++				throw new BAPIException("An Impossible error occured");
++			}
++		}
++
+         boolean var11;
+         int var12;
+         int var13;

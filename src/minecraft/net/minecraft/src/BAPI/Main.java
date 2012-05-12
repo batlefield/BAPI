@@ -12,10 +12,9 @@ import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.CompressedStreamTools;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.World;
-import net.minecraft.src.mod_BAPI;
 import net.minecraft.src.BAPI.interfaces.IBiome;
 import net.minecraft.src.BAPI.interfaces.ICreativeHandler;
+import net.minecraft.src.BAPI.interfaces.IGameOverlay;
 import net.minecraft.src.BAPI.interfaces.INBT;
 import net.minecraft.src.BAPI.interfaces.IPlacable;
 import net.minecraft.src.BAPI.minecraft.DefaultPlacingHandler;
@@ -23,19 +22,21 @@ import net.minecraft.src.BAPI.minecraft.DefaultPlacingHandler;
 public class Main
 {
     private static boolean init = false;
-    public static final String APIVer = "1.5.0";
+    public static final String APIVer = "1.5.2";
     public static final String MCVer = "1.2.5";
 
     protected static LinkedList<ICreativeHandler> creativeHandlers = new LinkedList<ICreativeHandler>();
     protected static LinkedList<IBiome> biomeHandlers = new LinkedList<IBiome>();
     protected static LinkedList<IPlacable>placableHandlers = new LinkedList<IPlacable>();
     protected static LinkedList<INBT>nbtHandlers = new LinkedList<INBT>();
+    protected static LinkedList<IGameOverlay>gameOverlays = new LinkedList<IGameOverlay>();
     private static List biomes = new ArrayList();
     private static List biomesFlat = new ArrayList();
     private static List biomesVillage = new ArrayList();
     private static List biomesStronghold = new ArrayList();
     private static List biomesSpawn = new ArrayList();
     private static boolean biomeInit = false;
+    protected static int liquidTex;
 
     private static void initialize()
     {
@@ -348,7 +349,20 @@ public class Main
             e.printStackTrace();
         }
     }
+        
+    public static LinkedList getGameOverlays()
+    {
+        if (!init)
+        {
+            initialize();
+        }
 
+        return gameOverlays;
+    }
+        
+    
+    
+    
     static
     {
         placableHandlers.add(new DefaultPlacingHandler());

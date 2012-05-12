@@ -23,7 +23,7 @@ import net.minecraft.src.BAPI.minecraft.DefaultPlacingHandler;
 public class Main
 {
     private static boolean init = false;
-    public static final String APIVer = "1.5.0";
+    public static final String APIVer = "1.5.2";
     public static final String MCVer = "1.2.5";
 
     protected static LinkedList<ICreativeHandler> creativeHandlers = new LinkedList<ICreativeHandler>();
