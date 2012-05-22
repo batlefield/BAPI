@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.CompressedStreamTools;
 import net.minecraft.src.ModLoader;
@@ -30,6 +31,8 @@ public class Main
     protected static LinkedList<IPlacable>placableHandlers = new LinkedList<IPlacable>();
     protected static LinkedList<INBT>nbtHandlers = new LinkedList<INBT>();
     protected static LinkedList<IGameOverlay>gameOverlays = new LinkedList<IGameOverlay>();
+    public static String[][] authors = new String[128][2];
+    public static int lastIndex = 0;
     private static List biomes = new ArrayList();
     private static List biomesFlat = new ArrayList();
     private static List biomesVillage = new ArrayList();
@@ -350,14 +353,12 @@ public class Main
         }
     }
         
-    public static LinkedList getGameOverlays()
+    public static void tickOverlay(Minecraft mc, int height, int width, float partialTicks, boolean isDisplayingGUI)
     {
-        if (!init)
-        {
-            initialize();
-        }
-
-        return gameOverlays;
+    	for (IGameOverlay handler : gameOverlays)
+		{
+			handler.render(mc, height, width, partialTicks, isDisplayingGUI);
+		}
     }
         
     
@@ -365,6 +366,8 @@ public class Main
     
     static
     {
+    	BAPI.registerModAuthor("BAPI", "Battlefield");
+    	
         placableHandlers.add(new DefaultPlacingHandler());
         biomes.add(BiomeGenBase.jungle);
         biomes.add(BiomeGenBase.desert);

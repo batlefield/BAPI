@@ -10,21 +10,13 @@
  
  import net.minecraft.src.forge.*;
  
-@@ -82,6 +85,18 @@
+@@ -82,6 +85,10 @@
              }
          }
  
-+		for (Object o : Main.getGameOverlays())
-+		{
-+			if (o instanceof IGameOverlay)
-+			{
-+				IGameOverlay handler = (IGameOverlay) o;
-+				handler.render(mc, var6, var7, par1, par2);
-+			} else
-+			{
-+				throw new BAPIException("An Impossible error occured");
-+			}
-+		}
++
++		Main.tickOverlay(mc, var6, var7, par1, par2);
++		
 +
          boolean var11;
          int var12;

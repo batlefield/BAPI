@@ -157,6 +157,7 @@ public class mod_BAPI extends NetworkMod
                 itemList.add(new ItemStack(Item.monsterPlacer.shiftedIndex, 1, var17.intValue()));
             }
             
+            
             ((ContainerCreative) container).itemList = itemList;
             
         }

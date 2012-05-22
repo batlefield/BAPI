@@ -15,6 +15,13 @@ public class BAPI
 		return Main.getSColor();
 	}
 	
+	public static void registerModAuthor(String modname, String author)
+	{
+		Main.authors[Main.lastIndex][0] = modname;
+		Main.authors[Main.lastIndex][1] = author;
+		Main.lastIndex++;
+	}
+	
 	public static void registerGameOverlay(IGameOverlay handler)
 	{
 		Main.gameOverlays.add(handler);
