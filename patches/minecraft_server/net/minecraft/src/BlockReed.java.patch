@@ -9,7 +9,7 @@
  public class BlockReed extends Block
  {
      protected BlockReed(int par1, int par2)
-@@ -47,10 +49,36 @@
+@@ -47,10 +49,37 @@
      /**
       * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
       */
@@ -18,33 +18,34 @@
      {
 -        int var5 = par1World.getBlockId(par2, par3 - 1, par4);
 -        return var5 == this.blockID ? true : (var5 != Block.grass.blockID && var5 != Block.dirt.blockID && var5 != Block.sand.blockID ? false : (par1World.getBlockMaterial(par2 - 1, par3 - 1, par4) == Material.water ? true : (par1World.getBlockMaterial(par2 + 1, par3 - 1, par4) == Material.water ? true : (par1World.getBlockMaterial(par2, par3 - 1, par4 - 1) == Material.water ? true : par1World.getBlockMaterial(par2, par3 - 1, par4 + 1) == Material.water))));
-+        int l = world.getBlockId(i, j - 1, k);
-+
++    	int l = world.getBlockId(i, j - 1, k);
++		int md = world.getBlockMetadata(i, j - 1, k);
++    	
 +        if (l == blockID)
 +        {
 +            return true;
 +        }
-+
-+        if (!Main.canPlaceR(l, world.getBlockMetadata(i, j - 1, k)))
++    	
++        if (!Main.canPlaceR(l, md))
 +        {
 +            return false;
 +        }
-+
++    	
 +        if (world.getBlockMaterial(i - 1, j - 1, k) == Material.water)
 +        {
 +            return true;
 +        }
-+
++    	
 +        if (world.getBlockMaterial(i + 1, j - 1, k) == Material.water)
 +        {
 +            return true;
 +        }
-+
++    	
 +        if (world.getBlockMaterial(i, j - 1, k - 1) == Material.water)
 +        {
 +            return true;
-+        }
-+
++    	}
++    	
 +        return world.getBlockMaterial(i, j - 1, k + 1) == Material.water;
      }
  

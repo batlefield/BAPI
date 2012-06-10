@@ -1,0 +1,18 @@
+[
+{
+  "modid" : "mod_BAPI",
+  "name" : "BAPI",
+  "version" : "V1.5.3",
+  "url" : "http://www2.arnes.si/~pmati/",
+  "credits" : "Battlefield",
+  "authors": [
+    "Battlefield"
+  ],
+  "description": "BAPI or battlefields API contains many useful hooks that provide compatibility among other mods.",
+  "logoFile" : "",
+  "updateUrl" : "http://www2.arnes.si/~pmati/BAPI.html",
+  "parent" : "",
+  "screenshots": [
+  ]
+}
+]

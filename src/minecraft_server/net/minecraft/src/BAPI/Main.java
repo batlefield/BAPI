@@ -12,8 +12,6 @@ import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.CompressedStreamTools;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.World;
-import net.minecraft.src.mod_BAPI;
 import net.minecraft.src.BAPI.interfaces.IBiome;
 import net.minecraft.src.BAPI.interfaces.ICreativeHandler;
 import net.minecraft.src.BAPI.interfaces.INBT;
@@ -23,19 +21,19 @@ import net.minecraft.src.BAPI.minecraft.DefaultPlacingHandler;
 public class Main
 {
     private static boolean init = false;
-    public static final String APIVer = "1.5.2";
+    public static final String APIVer = "1.5.3";
     public static final String MCVer = "1.2.5";
 
     protected static LinkedList<ICreativeHandler> creativeHandlers = new LinkedList<ICreativeHandler>();
     protected static LinkedList<IBiome> biomeHandlers = new LinkedList<IBiome>();
     protected static LinkedList<IPlacable>placableHandlers = new LinkedList<IPlacable>();
     protected static LinkedList<INBT>nbtHandlers = new LinkedList<INBT>();
-    private static List biomes = new ArrayList();
-    private static List biomesFlat = new ArrayList();
+    public static int lastIndex = 0;
     private static List biomesVillage = new ArrayList();
     private static List biomesStronghold = new ArrayList();
     private static List biomesSpawn = new ArrayList();
     private static boolean biomeInit = false;
+    protected static int liquidTex;
 
     private static void initialize()
     {
@@ -46,7 +44,7 @@ public class Main
         }
     }
 
-    public static LinkedList getCreativeHandlers()
+    public static LinkedList<ICreativeHandler> getCreativeHandlers()
     {
         if (!init)
         {
@@ -138,8 +136,6 @@ public class Main
     {
         for (IBiome handler : biomeHandlers)
         {
-            biomes.add(handler.getBiome());
-
             if (handler.canSpawnIn())
             {
                 biomesSpawn.add(handler.getBiome());
@@ -153,11 +149,6 @@ public class Main
             if (handler.canGenerateStronghold())
             {
                 biomesStronghold.add(handler.getBiome());
-            }
-
-            if (handler.canGeneratInFlat())
-            {
-                biomesFlat.add(handler.getBiome());
             }
         }
 
@@ -176,30 +167,21 @@ public class Main
             initBiomes();
         }
 
-        if (i <= 0 || i >= 6)
+        if (i <= 0 || i >= 4)
         {
-            throw new BAPIException("BAPI: Wrong integer");
+            throw new BAPIException("BAPI: Invalid integer");
         }
 
         switch (i)
         {
             case 1:
-                return biomes;
-
-            case 2:
                 return biomesVillage;
-
-            case 3:
+            case 2:
                 return biomesStronghold;
-
-            case 4:
+            case 3:
                 return biomesSpawn;
-
-            case 5:
-                return biomesFlat;
-
             default:
-                return biomes;
+                return null;	
         }
     }
 
@@ -435,23 +417,12 @@ public class Main
             e.printStackTrace();
         }
     }
-
+        
+    
+    
     static
     {
         placableHandlers.add(new DefaultPlacingHandler());
-        biomes.add(BiomeGenBase.jungle);
-        biomes.add(BiomeGenBase.desert);
-        biomes.add(BiomeGenBase.forest);
-        biomes.add(BiomeGenBase.extremeHills);
-        biomes.add(BiomeGenBase.swampland);
-        biomes.add(BiomeGenBase.plains);
-        biomes.add(BiomeGenBase.taiga);
-        biomesFlat.add(BiomeGenBase.desert);
-        biomesFlat.add(BiomeGenBase.forest);
-        biomesFlat.add(BiomeGenBase.extremeHills);
-        biomesFlat.add(BiomeGenBase.swampland);
-        biomesFlat.add(BiomeGenBase.plains);
-        biomesFlat.add(BiomeGenBase.taiga);
         biomesSpawn.add(BiomeGenBase.forest);
         biomesSpawn.add(BiomeGenBase.plains);
         biomesSpawn.add(BiomeGenBase.taiga);

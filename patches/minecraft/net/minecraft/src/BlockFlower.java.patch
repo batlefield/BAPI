@@ -9,28 +9,28 @@
  public class BlockFlower extends Block
  {
      protected BlockFlower(int par1, int par2, Material par3Material)
-@@ -23,7 +25,19 @@
+@@ -23,9 +25,19 @@
       */
      public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
      {
 -        return super.canPlaceBlockAt(par1World, par2, par3, par4) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
 +        return super.canPlaceBlockAt(par1World, par2, par3, par4) && this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4), par1World.getBlockMetadata(par2, par3 - 1, par4));
-+    }
-+
-+    protected boolean canThisPlantGrowOnThisBlockID(int i, int j)
-+    {
-+        if (Main.canPlace(blockID, i, j))
-+        {
-+            return true;
-+        }
-+        else
-+        {
-+            return this.canThisPlantGrowOnThisBlockID(i);
-+        }
      }
  
++    protected boolean canThisPlantGrowOnThisBlockID(int i, int j)
++    {
++        if(Main.canPlace(blockID, i, j))
++        {
++        	return true;
++        }else{
++        	return canThisPlantGrowOnThisBlockID(i);
++        }
++    }
++    
      /**
-@@ -67,7 +81,7 @@
+      * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
+      * blockID passed in. Args: blockID
+@@ -67,7 +79,7 @@
       */
      public boolean canBlockStay(World par1World, int par2, int par3, int par4)
      {

@@ -5,17 +5,10 @@ import net.minecraft.src.BiomeGenBase;
 public interface IBiome
 {
     /**
-     * Return the biome to generate
+     * Return the biome
      * @return
      */
     public BiomeGenBase getBiome();
-
-    /**
-     * Return true if this biome can generate in flat
-     * @return
-     */
-
-    public boolean canGeneratInFlat();
 
     /**
      * Return true if player can spawn in this biome

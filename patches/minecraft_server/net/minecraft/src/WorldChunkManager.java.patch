@@ -21,7 +21,7 @@
 -        this.biomesToSpawnIn.add(BiomeGenBase.forestHills);
 -        this.biomesToSpawnIn.add(BiomeGenBase.jungle);
 -        this.biomesToSpawnIn.add(BiomeGenBase.jungleHills);
-+        this.biomesToSpawnIn = Main.getBiome(4);
++        this.biomesToSpawnIn = Main.getBiome(3);
      }
  
      public WorldChunkManager(long par1, WorldType par3WorldType)

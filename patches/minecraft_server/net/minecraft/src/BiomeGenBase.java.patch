@@ -45,7 +45,7 @@
      {
          this.enableRain = false;
          return this;
-@@ -205,25 +205,25 @@
+@@ -208,25 +208,25 @@
      /**
       * sets enableSnow to true during biome initialization. returns BiomeGenBase.
       */

@@ -9,19 +9,20 @@
  public class BlockTorch extends Block
  {
      protected BlockTorch(int par1, int par2)
-@@ -56,13 +58,12 @@
+@@ -56,12 +58,13 @@
          else
          {
              int var5 = par1World.getBlockId(par2, par3, par4);
-+            int var6 = par1World.getBlockMetadata(par2, par3, par4);
- 
+-
 -            if (var5 != Block.fence.blockID && var5 != Block.netherFence.blockID && var5 != Block.glass.blockID)
++            int var6 = par1World.getBlockMetadata(par2, par3, par4);
++            
 +            if (!Main.canPlaceT(var5, var6))
              {
                  if (Block.blocksList[var5] != null && Block.blocksList[var5] instanceof BlockStairs)
                  {
 -                    int var6 = par1World.getBlockMetadata(par2, par3, par4);
--
++                    
+ 
                      if ((4 & var6) != 0)
                      {
-                         return true;

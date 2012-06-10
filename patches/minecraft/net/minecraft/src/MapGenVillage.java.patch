@@ -10,7 +10,7 @@
  {
      /** A list of all the biomes villages can spawn in. */
 -    public static List villageSpawnBiomes = Arrays.asList(new BiomeGenBase[] {BiomeGenBase.plains, BiomeGenBase.desert});
-+    public static List villageSpawnBiomes = Main.getBiome(2);
++    public static List villageSpawnBiomes = Main.getBiome(1);
  
      /** World terrain type, 0 for normal, 1 for flat map */
      private final int terrainType;

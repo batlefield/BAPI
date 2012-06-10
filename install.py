@@ -15,10 +15,10 @@ from runtime.updatemd5 import updatemd5
 from runtime.cleanup import cleanup
 from runtime.updatemcp import updatemcp
 
-from BAPI import apply_patches, copytree, reset_logger, download_ff
+from BAPI import apply_patches, copytree, reset_logger, download_ff, cleanup_source, pre_decompile, post_decompile
 
 def main():
-    print '=================================== BAPI Setup Start ================================='
+    print '=================================== Minecraft Forge Setup Start ================================='
     
     if os.path.isdir(os.path.join(mcp_dir, 'conf')):
         shutil.rmtree(os.path.join(mcp_dir, 'conf'))
@@ -43,6 +43,9 @@ def main():
         decompile(None, False, False, True, True, False, True, False, False, False, False)
         reset_logger()
         os.chdir(forge_dir)
+        
+        post_decompile()
+        
     except SystemExit, e:
         print 'Decompile Exception: %d ' % e.code
         raise e   
@@ -51,6 +54,8 @@ def main():
         print 'Something went wrong, src folder not found at: %s' % src_dir
         sys.exit(1)
         
+    cleanup_source(src_dir)
+    
     has_client = os.path.isdir(os.path.join(mcp_dir, 'src', 'minecraft'))
     has_server = os.path.isdir(os.path.join(mcp_dir, 'src', 'minecraft_server'))
     
@@ -71,7 +76,8 @@ def main():
     updatenames(None, True)
     reset_logger()
     os.chdir(forge_dir)
-        
+
+
     print 'Applying forge patches'
     if has_client:
         if os.path.isdir(os.path.join(forge_dir, 'patches', 'minecraft')):
@@ -83,8 +89,6 @@ def main():
             apply_patches(os.path.join(forge_dir, 'patches', 'minecraft_server'), src_dir)
         if os.path.isdir(os.path.join(forge_dir, 'src', 'minecraft_server')):
             copytree(os.path.join(forge_dir, 'src', 'minecraft_server'), os.path.join(src_dir, 'minecraft_server'))
-			
-	os.chdir(BAPI_dir)
 			
 	print 'Applying BAPI patches'
     if has_client:

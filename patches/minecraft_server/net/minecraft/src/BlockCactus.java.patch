@@ -9,37 +9,13 @@
  public class BlockCactus extends Block
  {
      protected BlockCactus(int par1, int par2)
-@@ -54,9 +56,21 @@
-     /**
-      * Returns the block texture based on the side being looked at.  Args: side
-      */
--    public int getBlockTextureFromSide(int par1)
-+    public int getBlockTextureFromSide(int i)
-     {
--        return par1 == 1 ? this.blockIndexInTexture - 1 : (par1 == 0 ? this.blockIndexInTexture + 1 : this.blockIndexInTexture);
-+        if (i == 1)
-+        {
-+            return blockIndexInTexture - 1;
-+        }
-+
-+        if (i == 0)
-+        {
-+            return blockIndexInTexture + 1;
-+        }
-+        else
-+        {
-+            return blockIndexInTexture;
-+        }
-     }
- 
-     /**
-@@ -126,6 +140,10 @@
+@@ -126,6 +128,10 @@
          {
              return false;
          }
-+        else if (Main.canPlaceC(par1World.getBlockId(par2, par3 - 1, par4), par1World.getBlockMetadata(par2, par3 - 1, par4)))
++        else if(Main.canPlaceC(par1World.getBlockId(par2, par3 - 1, par4), par1World.getBlockMetadata(par2, par3 - 1, par4)))
 +        {
-+            return true;
++        	return true;
 +        }
          else
          {

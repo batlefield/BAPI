@@ -9,7 +9,7 @@
  public class BlockTorch extends Block
  {
      protected BlockTorch(int par1, int par2)
-@@ -56,13 +58,12 @@
+@@ -56,12 +58,12 @@
          else
          {
              int var5 = par1World.getBlockId(par2, par3, par4);
@@ -21,22 +21,6 @@
                  if (Block.blocksList[var5] != null && Block.blocksList[var5] instanceof BlockStairs)
                  {
 -                    int var6 = par1World.getBlockMetadata(par2, par3, par4);
--
+ 
                      if ((4 & var6) != 0)
                      {
-                         return true;
-@@ -84,10 +85,10 @@
-     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
-     {
-         return par1World.isBlockSolidOnSide(par2 - 1, par3, par4, 5) ||
--               par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4) ||
--               par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3) ||
--               par1World.isBlockSolidOnSide(par2, par3, par4 + 1, 2) ||
--               this.canPlaceTorchOn(par1World, par2, par3 - 1, par4);
-+                par1World.isBlockSolidOnSide(par2 + 1, par3, par4, 4) ||
-+                par1World.isBlockSolidOnSide(par2, par3, par4 - 1, 3) ||
-+                par1World.isBlockSolidOnSide(par2, par3, par4 + 1, 2) ||
-+                this.canPlaceTorchOn(par1World, par2, par3 - 1, par4);
-     }
- 
-     /**

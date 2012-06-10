@@ -114,13 +114,9 @@ public class mod_BAPI extends NetworkMod
                 itemList.add(new ItemStack(var2[var12], 1, var13));
             }
             
-            for (Object o : Main.getCreativeHandlers())
+            for (ICreativeHandler handler : Main.getCreativeHandlers())
             {
-                if (o instanceof ICreativeHandler)
-                {
-                    ICreativeHandler handler = ((ICreativeHandler)o);
-                    handler.addCreativeBlocks((ArrayList) itemList);
-                }
+         		handler.addCreativeBlocks((ArrayList) itemList);
             }
             
             for (Block block : Block.blocksList)
@@ -140,13 +136,9 @@ public class mod_BAPI extends NetworkMod
                 }
             }
             
-            for (Object o : Main.getCreativeHandlers())
+            for (ICreativeHandler handler : Main.getCreativeHandlers())
             {
-                if (o instanceof ICreativeHandler)
-                {
-                    ICreativeHandler handler = ((ICreativeHandler)o);
-                    handler.addCreativeItems((ArrayList) itemList);
-                }
+         		handler.addCreativeItems((ArrayList) itemList);
             }
 
             Iterator var15 = EntityList.entityEggs.keySet().iterator();

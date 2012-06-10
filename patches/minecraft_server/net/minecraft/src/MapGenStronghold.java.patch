@@ -14,7 +14,7 @@
      public MapGenStronghold()
      {
 -        this.allowedBiomeGenBases = new BiomeGenBase[] {BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.extremeHills, BiomeGenBase.swampland, BiomeGenBase.taiga, BiomeGenBase.icePlains, BiomeGenBase.iceMountains, BiomeGenBase.desertHills, BiomeGenBase.forestHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.jungle, BiomeGenBase.jungleHills};
-+        this.allowedBiomeGenBases = (BiomeGenBase[]) Main.getBiome(3).toArray(new BiomeGenBase[Main.getBiome(3).size()]);
++        this.allowedBiomeGenBases = (BiomeGenBase[])Main.getBiome(2).toArray(new BiomeGenBase[Main.getBiome(2).size()]);
          this.structureCoords = new ChunkCoordIntPair[3];
      }
  

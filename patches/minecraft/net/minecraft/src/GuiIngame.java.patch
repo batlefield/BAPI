@@ -1,23 +1,19 @@
 --- ../src_base/minecraft/net/minecraft/src/GuiIngame.java	0000-00-00 00:00:00.000000000 -0000
 +++ ../src_work/minecraft/net/minecraft/src/GuiIngame.java	0000-00-00 00:00:00.000000000 -0000
-@@ -8,6 +8,9 @@
- import net.minecraft.client.Minecraft;
+@@ -9,6 +9,7 @@
  import org.lwjgl.opengl.GL11;
  import org.lwjgl.opengl.GL12;
-+import net.minecraft.src.BAPI.BAPIException;
-+import net.minecraft.src.BAPI.Main;
-+import net.minecraft.src.BAPI.interfaces.IGameOverlay;
  
++import net.minecraft.src.BAPI.Main;
  import net.minecraft.src.forge.*;
  
-@@ -82,6 +85,10 @@
+ public class GuiIngame extends Gui
+@@ -81,6 +82,8 @@
+                 this.renderPortalOverlay(var10, var6, var7);
              }
          }
++        
++        Main.tickOverlay(mc, var7, var6, par1, par2);
  
-+
-+		Main.tickOverlay(mc, var6, var7, par1, par2);
-+		
-+
          boolean var11;
          int var12;
-         int var13;

@@ -9,25 +9,25 @@
  public class SaveHandler implements ISaveHandler
  {
      /** Reference to the logger. */
-@@ -121,6 +123,10 @@
+@@ -120,7 +122,10 @@
+      * Loads and returns the world info
       */
      public WorldInfo loadWorldInfo()
-     {
-+        File file;
-+        file = new File(saveDirectory, "BAPI");
-+        file.mkdirs();
-+        Main.loadNBT(file);
+-    {
++    {	
++    	File file = new File(saveDirectory, "BAPI");
++    	file.mkdirs();
++    	Main.loadNBT(file);
          File var1 = new File(this.saveDirectory, "level.dat");
          NBTTagCompound var2;
          NBTTagCompound var3;
-@@ -163,6 +169,10 @@
+@@ -163,6 +168,9 @@
       */
      public void saveWorldInfoAndPlayer(WorldInfo par1WorldInfo, List par2List)
      {
-+        File file;
-+        file = new File(saveDirectory, "BAPI");
-+        file.mkdirs();
-+        Main.saveNBT(file);
++    	File file = new File(saveDirectory, "BAPI");
++    	file.mkdirs();
++    	Main.saveNBT(file);
          NBTTagCompound var3 = par1WorldInfo.getNBTTagCompoundWithPlayers(par2List);
          NBTTagCompound var4 = new NBTTagCompound();
          var4.setTag("Data", var3);
