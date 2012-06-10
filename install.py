@@ -18,7 +18,7 @@ from runtime.updatemcp import updatemcp
 from BAPI import apply_patches, copytree, reset_logger, download_ff, cleanup_source, pre_decompile, post_decompile
 
 def main():
-    print '=================================== Minecraft Forge Setup Start ================================='
+    print '=================================== BAPI setup started ================================='
     
     if os.path.isdir(os.path.join(mcp_dir, 'conf')):
         shutil.rmtree(os.path.join(mcp_dir, 'conf'))
