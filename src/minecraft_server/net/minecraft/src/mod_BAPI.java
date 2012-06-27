@@ -3,14 +3,13 @@ package net.minecraft.src;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.BAPI.Main;
 import net.minecraft.src.BAPI.VersionCheck;
+import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.NetworkMod;
 
 public class mod_BAPI extends NetworkMod
 {
     @MLProp(name = "Version check")
     private boolean versionCheck = false;
-    public static boolean disableNbt = true;
-    private boolean guiTick;
 
     public String getVersion()
     {
@@ -19,6 +18,11 @@ public class mod_BAPI extends NetworkMod
     
     public void load()
     {
+    	MinecraftForge.versionDetectStrict("BAPI", 3, 2, 5);
+    	if(ModLoader.getMinecraftServerInstance().getVersion() != Main.MCVer)
+    	{
+    		throw new RuntimeException("BAPI: Minecraft version not matching, required version:" + Main.MCVer);
+    	}
         ModLoader.setInGameHook(this, true, true);
         ModLoader.setInGUIHook(this, true, true);
     }

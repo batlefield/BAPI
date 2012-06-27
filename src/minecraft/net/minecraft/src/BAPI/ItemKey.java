@@ -2,8 +2,8 @@ package net.minecraft.src.BAPI;
 
 public class ItemKey
 {
-    private final int itemID;
-    private final int itemDamage;
+    public final int itemID;
+    public final int itemDamage;
 
     public ItemKey(int item, int damage)
     {

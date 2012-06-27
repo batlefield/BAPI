@@ -5,6 +5,7 @@ import net.minecraft.src.BAPI.interfaces.IBiome;
 import net.minecraft.src.BAPI.interfaces.ICreativeHandler;
 import net.minecraft.src.BAPI.interfaces.INBT;
 import net.minecraft.src.BAPI.interfaces.IPlacable;
+import cpw.mods.fml.server.FMLServerHandler;
 
 public class BAPI
 {
@@ -15,6 +16,7 @@ public class BAPI
 	
 	public static void registerBiomeHandler(IBiome handler)
 	{
+		FMLServerHandler.instance().addBiomeToDefaultWorldGenerator(handler.getBiome());
 		Main.biomeHandlers.add(handler);
 		Main.stringer("Registered new biome handler " + handler.getClass().getSimpleName());
 	}
@@ -24,12 +26,16 @@ public class BAPI
 		if (biome instanceof IBiome)
 		{
 			IBiome handler = ((IBiome) biome);
-			Main.biomeHandlers.add(handler);
-			Main.stringer("Registered new biome " + biome.getClass().getSimpleName());
+			registerBiomeHandler(handler);
 		} else
 		{
 			throw new BAPIException("Biome handler not implemented inside " + biome.getClass().getSimpleName() + " class.");
 		}
+	}
+	public static void registerCreativeHandler(ICreativeHandler handler)
+	{
+		Main.creativeHandlers.add(handler);
+		Main.stringer("Registered new creative handler " + handler.getClass().getSimpleName());
 	}
 
 	public static void registerNBT(INBT handler)
@@ -42,12 +48,6 @@ public class BAPI
 		{
 			throw new BAPIException("Invalid NBT name parameter for handler " + handler.getClass().getSimpleName());
 		}
-	}
-
-	public static void registerCreativeHandler(ICreativeHandler handler)
-	{
-		Main.creativeHandlers.add(handler);
-		Main.stringer("Registered new creative handler " + handler.getClass().getSimpleName());
 	}
 
 	public static void registerPlacableHandler(IPlacable handler)

@@ -19,6 +19,8 @@ import net.minecraft.src.BAPI.interfaces.IGameOverlay;
 import net.minecraft.src.BAPI.interfaces.INBT;
 import net.minecraft.src.BAPI.interfaces.IPlacable;
 import net.minecraft.src.BAPI.minecraft.DefaultPlacingHandler;
+import net.minecraft.src.BAPI.minecraft.SaveHandlerDefault;
+import net.minecraft.src.forge.MinecraftForge;
 
 public class Main
 {
@@ -313,6 +315,11 @@ public class Main
             initialize();
         }
 
+        for(INBT handler : nbtHandlers)
+        {
+        	handler.beforeWorldLoad();
+        }
+        
         try
         {
             for (INBT handler : nbtHandlers)
@@ -364,6 +371,8 @@ public class Main
     
     static
     {
+    	MinecraftForge.registerSaveHandler(new SaveHandlerDefault());
+    	
     	BAPI.registerModAuthor("BAPI", "Battlefield");
     	
         placableHandlers.add(new DefaultPlacingHandler());

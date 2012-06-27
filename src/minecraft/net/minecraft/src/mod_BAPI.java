@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.BAPI.Main;
 import net.minecraft.src.BAPI.VersionCheck;
 import net.minecraft.src.BAPI.interfaces.ICreativeHandler;
+import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.NetworkMod;
 
 import org.lwjgl.opengl.GL11;
@@ -18,24 +20,32 @@ public class mod_BAPI extends NetworkMod
 
     @MLProp(name = "Version check")
     private boolean versionCheck = false;
-    public static boolean disableNbt = true;
-    private boolean guiTick;
+    private boolean hadWorld = false;
 
     public String getVersion()
     {
         return "BAPI V" + Main.APIVer + " for minecraft " + Main.MCVer;
     }
     
+    public static File getSave(World world)
+    {
+    	return ((SaveHandler)world.saveHandler).getSaveDirectory();
+    }
+    
     public void load()
     {
-        ModLoader.setInGameHook(this, true, true);
-        ModLoader.setInGUIHook(this, true, true);
+    	MinecraftForge.versionDetectStrict("BAPI", 3, 2, 5);
+    	if(Minecraft.getVersion() != Main.MCVer)
+    	{
+    		throw new RuntimeException("BAPI: Minecraft version not matching, required version:" + Main.MCVer);
+    	}
+        ModLoader.setInGameHook(this, true, false);
+        ModLoader.setInGUIHook(this, true, false);
     }
 
     public boolean onTickInGame(float var1, Minecraft minecraft)
     {
         String s = VersionCheck.run("http://www2.arnes.si/~pmati/BAUC.html");
-
         if (versionCheck && !s.equals(Main.APIVer))
         {
             minecraft.thePlayer.addChatMessage("New BAPI version available(V" + s + ")");
@@ -49,7 +59,6 @@ public class mod_BAPI extends NetworkMod
     	if (minecraft.currentScreen == null)
         {
             lastGuiOpen = null;
-            guiTick = false;
         }
         if ((guiscreen instanceof GuiContainerCreative) && !(lastGuiOpen instanceof GuiContainerCreative))
         {
